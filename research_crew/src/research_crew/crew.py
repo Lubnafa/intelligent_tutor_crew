@@ -1,12 +1,9 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
-# If you want to run a snippet of code before or after the crew starts,
-# you can use the @before_kickoff and @after_kickoff decorators
-# https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
 
 @CrewBase
-class IntelligentTutorCrew():
-    """IntelligentTutorCrew crew"""
+class ResearchCrew():
+    """ResearchCrew crew"""
 
     @agent
     def teacher_agent(self) -> Agent:

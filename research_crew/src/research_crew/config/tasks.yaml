@@ -25,13 +25,14 @@ generate_quiz_task:
         - Create multiple choice questions with 4 options each (A, B, C, D)
         - Questions should test understanding of key concepts
         - Format as JSON array with this structure:
-        [{"question": "...", "options": ["A", "B", "C", "D"], "answer": "B"}]
+        [{{"question": "...", "options": ["A", "B", "C", "D"], "answer": "B"}}]
         - Only output valid JSON, no additional text
   expected_output: >
     A JSON array of quiz questions with questions, options, and correct answers
   dependencies: [teach_topic_task]
   agent: quiz_generator_agent
   output_file: data/output/quiz_questions.json
+
 
 grade_answers_task:
   description: >
@@ -50,21 +51,23 @@ grade_answers_task:
         4. Calculate an overall score out of 100
         
         Format your response as JSON:
-        {
+        {{
             "score": 85,
             "total_questions": 5,
             "correct": 4,
             "incorrect": 1,
             "results": [
-                {"question": 1, "correct": true, "explanation": ""},
-                {"question": 2, "correct": false, "explanation": "..."}
+                {{"question": 1, "correct": true, "explanation": ""}},
+                {{"question": 2, "correct": false, "explanation": "..."}}
             ]
-        }
+        }}
   dependencies: [generate_quiz_task]
   expected_output: >
     A JSON object with score, results, and explanations for each question
   agent: grader_agent
   output_file: data/output/grading_results.json
+
+
 
 provide_feedback_task:
   description: >
@@ -84,7 +87,7 @@ provide_feedback_task:
         
         Make the feedback constructive, specific, and actionable.
   expected_output: >
-    A well-formatted markdown document with performance summary, strengths, weaknesses, and recommendations
+   A well-formatted markdown document with performance summary, strengths, weaknesses, and recommendations
   agent: feedback_agent
   dependencies: [grade_answers_task]
   output_file: data/output/feedback.md

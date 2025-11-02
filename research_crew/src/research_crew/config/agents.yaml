@@ -7,7 +7,7 @@ teacher_agent:
     You are an experienced educator with a passion for making complex 
         concepts accessible. You break down topics into digestible steps and use practical 
         examples to help students understand.
-  llm: gemini/gemini-1.5-flash
+  llm: openai/gpt-4o-mini
 
 quiz_generator_agent:
   role: >
@@ -18,7 +18,7 @@ quiz_generator_agent:
    You are a curriculum developer specializing in assessment design. 
         You create clear, fair quiz questions that accurately measure student comprehension 
         and identify knowledge gaps.
-  llm: gemini/gemini-1.5-flash
+  llm: openai/gpt-4o-mini
 
 grader_agent:
   role: >
@@ -29,7 +29,7 @@ grader_agent:
     You are a fair and thorough grader who provides detailed feedback 
         on student responses. You identify both correct and incorrect answers, explaining 
         mistakes to help students learn.
-  llm: gemini/gemini-1.5-flash
+  llm: openai/gpt-4o-mini
   
 feedback_agent:
   role: >
@@ -40,5 +40,5 @@ feedback_agent:
     You are a learning coach who analyzes student performance holistically. 
         You identify strengths, weaknesses, and provide clear guidance on how to improve 
         understanding of the topic.
-  llm: gemini/gemini-1.5-flash
+  llm: openai/gpt-4o-mini
   
