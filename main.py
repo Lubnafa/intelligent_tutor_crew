@@ -1,40 +1,102 @@
-"""Main entry point for the Intelligent Tutor Crew application."""
+#!/usr/bin/env python
+import sys
+import warnings
 
-import os
-from dotenv import load_dotenv
-from src.intelligent_tutor_crew.crew import create_intelligent_tutor_crew
+from datetime import datetime
 
-# Load environment variables
-load_dotenv()
+from src.intelligent_tutor_crew.crew import IntelligentTutorCrew
 
-# Verify API key is set
-if not os.getenv("GOOGLE_API_KEY"):
-    raise ValueError(
-        "GOOGLE_API_KEY not found in environment variables. "
-        "Please set it in your .env file."
-    )
+warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
+# This main file is intended to be a way for you to run your
+# crew locally, so refrain from adding unnecessary logic into this file.
+# Replace with inputs you want to test with, it will automatically
+# interpolate any tasks and agents information
 
-def main():
-    """Run the Intelligent Tutor Crew."""
-    print("🚀 Starting Intelligent Tutor Crew...\n")
-    
-    # Example usage - you can modify this to accept user input
-    topic = "Python list comprehensions"
-    print(f"📚 Topic: {topic}\n")
-    
-    # Create and run crew
-    crew = create_intelligent_tutor_crew(topic=topic)
-    result = crew.kickoff()
-    
-    print("\n✅ Crew run complete!\n")
-    print("=" * 80)
-    print("RESULT:")
-    print("=" * 80)
-    print(result)
-    
-    return result
+def run():
+    """
+    Run the crew.
+    """
+    inputs = {
+        'topic': 'Python list comprehensions',
+        'student_answers': """1. A
+2. B
+3. C
+4. D
+5. A""",
+        # These will be populated from previous task outputs during execution
+        'topic_explanation': '',
+        'quiz_questions': '',
+        'grading_results': ''
+    }
+
+    try:
+        IntelligentTutorCrew().crew().kickoff(inputs=inputs)
+    except Exception as e:
+        raise Exception(f"An error occurred while running the crew: {e}")
 
 
-if __name__ == "__main__":
-    main()
+def train():
+    """
+    Train the crew for a given number of iterations.
+    """
+    inputs = {
+        "topic": "Python list comprehensions",
+        'student_answers': ""
+    }
+    try:
+        IntelligentTutorCrew().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
+
+    except Exception as e:
+        raise Exception(f"An error occurred while training the crew: {e}")
+
+def replay():
+    """
+    Replay the crew execution from a specific task.
+    """
+    try:
+        IntelligentTutorCrew().crew().replay(task_id=sys.argv[1])
+
+    except Exception as e:
+        raise Exception(f"An error occurred while replaying the crew: {e}")
+
+def test():
+    """
+    Test the crew execution and returns the results.
+    """
+    inputs = {
+        "topic": "Python list comprehensions",
+        "student_answers": ""
+    }
+
+    try:
+        IntelligentTutorCrew().crew().test(n_iterations=int(sys.argv[1]), eval_llm=sys.argv[2], inputs=inputs)
+
+    except Exception as e:
+        raise Exception(f"An error occurred while testing the crew: {e}")
+
+def run_with_trigger():
+    """
+    Run the crew with trigger payload.
+    """
+    import json
+
+    if len(sys.argv) < 2:
+        raise Exception("No trigger payload provided. Please provide JSON payload as argument.")
+
+    try:
+        trigger_payload = json.loads(sys.argv[1])
+    except json.JSONDecodeError:
+        raise Exception("Invalid JSON payload provided as argument")
+
+    inputs = {
+        "crewai_trigger_payload": trigger_payload,
+        "topic": "",
+        "student_answers": ""
+    }
+
+    try:
+        result = IntelligentTutorCrew().crew().kickoff(inputs=inputs)
+        return result
+    except Exception as e:
+        raise Exception(f"An error occurred while running the crew with trigger: {e}")

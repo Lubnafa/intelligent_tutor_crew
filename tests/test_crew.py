@@ -21,3 +21,4 @@ def test_crew_with_answers():
     assert crew is not None
     assert len(crew.tasks) >= 2  # Should have at least teach and quiz tasks
 
+

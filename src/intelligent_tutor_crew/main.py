@@ -2,7 +2,7 @@
 
 import os
 from dotenv import load_dotenv
-from .crew import create_intelligent_tutor_crew
+from .crew import IntelligentTutorCrew
 
 # Load environment variables
 load_dotenv()
@@ -20,12 +20,14 @@ def main():
     print("🚀 Starting Intelligent Tutor Crew...\n")
     
     # Example usage - you can modify this to accept user input
-    topic = "Python list comprehensions"
-    print(f"📚 Topic: {topic}\n")
+    inputs = {
+        'topic': 'Python list comprehensions',
+        'student_answers': ''
+    }
     
     # Create and run crew
-    crew = create_intelligent_tutor_crew(topic=topic)
-    result = crew.kickoff()
+    crew = IntelligentTutorCrew().crew()
+    result = crew.kickoff(inputs=inputs)
     
     print("\n✅ Crew run complete!\n")
     print("=" * 80)
@@ -38,4 +40,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
