@@ -1,0 +1,50 @@
+tasks:
+  - name: Teach Topic
+    description: |
+      Explain the requested topic clearly and comprehensively with examples.
+      End with 3 key takeaways the student should remember.
+    agent: TeacherAgent
+    expected_output: |
+      A comprehensive explanation of the topic including:
+      - Step-by-step breakdown
+      - Practical examples
+      - 3 key takeaways
+      
+  - name: Generate Quiz
+    description: |
+      Create 3-5 short quiz questions related to the topic that was explained.
+      Questions should test understanding of the key concepts.
+    agent: QuizAgent
+    expected_output: |
+      A JSON array of quiz questions in this format:
+      [{"question": "...", "options": ["A","B","C","D"], "answer": "B"}]
+    context:
+      - Teach Topic
+      
+  - name: Grade Answers
+    description: |
+      Evaluate student answers against the quiz questions.
+      Assign a score out of 100 and provide explanations for incorrect answers.
+    agent: GraderAgent
+    expected_output: |
+      A grading report including:
+      - Overall score (out of 100)
+      - Per-question feedback
+      - Explanations for incorrect answers
+    context:
+      - Generate Quiz
+      
+  - name: Provide Feedback
+    description: |
+      Summarize the student's performance and provide personalized recommendations
+      for areas of improvement based on their quiz performance.
+    agent: FeedbackAgent
+    expected_output: |
+      Markdown-formatted feedback including:
+      - Performance summary
+      - Strengths
+      - Areas for improvement
+      - Recommended next steps
+    context:
+      - Grade Answers
+

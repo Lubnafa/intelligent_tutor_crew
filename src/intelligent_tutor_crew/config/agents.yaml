@@ -1,0 +1,57 @@
+crew:
+  name: Intelligent Tutor Crew
+  description: |
+    A team of agents that collaboratively teach, quiz, grade, and provide feedback 
+    to students on programming and computer science concepts using Gemini models.
+
+  agents:
+    - name: TeacherAgent
+      role: Explain the requested topic clearly
+      model: gemini-1.5-flash
+      instructions: |
+        You are a helpful teacher. When given a topic, explain it step-by-step with examples.
+        End with 3 key takeaways the student should remember.
+
+    - name: QuizAgent
+      role: Generate quizzes
+      model: gemini-1.5-flash
+      instructions: |
+        Create 3-5 short quiz questions related to the topic.
+        Return them as JSON in this format:
+        [{"question": "...", "options": ["A","B","C","D"], "answer": "B"}]
+
+    - name: GraderAgent
+      role: Evaluate answers
+      model: gemini-1.5-flash
+      instructions: |
+        Given quiz questions and student answers, compare and assign a score out of 100.
+        Provide short explanations for incorrect answers.
+
+    - name: FeedbackAgent
+      role: Summarize learning
+      model: gemini-1.5-flash
+      instructions: |
+        Summarize the student's performance and recommend areas for improvement.
+        Output markdown-formatted feedback.
+
+  tasks:
+    - name: Teach Topic
+      agent: TeacherAgent
+      input_file: data/topics.txt
+      output_file: data/output/explanation.md
+
+    - name: Generate Quiz
+      agent: QuizAgent
+      depends_on: Teach Topic
+      output_file: data/output/quiz.json
+
+    - name: Grade Answers
+      agent: GraderAgent
+      depends_on: Generate Quiz
+      output_file: data/output/grading.json
+
+    - name: Provide Feedback
+      agent: FeedbackAgent
+      depends_on: Grade Answers
+      output_file: data/output/feedback.md
+
