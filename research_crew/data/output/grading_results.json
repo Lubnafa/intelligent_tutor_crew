@@ -1,15 +1,33 @@
-```json
 {
-    "score": 80,
+    "score": 60,
     "total_questions": 5,
-    "correct": 4,
-    "incorrect": 1,
+    "correct": 3,
+    "incorrect": 2,
     "results": [
-        {"question": 1, "correct": true, "explanation": ""},
-        {"question": 2, "correct": true, "explanation": ""},
-        {"question": 3, "correct": true, "explanation": ""},
-        {"question": 4, "correct": true, "explanation": ""},
-        {"question": 5, "correct": false, "explanation": "The question asks how code blocks are defined in Python, and the correct answer is B. Indentation. However, the student's answer is A."}
+        {
+            "question": 1,
+            "correct": false,
+            "explanation": "The correct answer is B (Guido van Rossum), not A. James Gosling created Java."
+        },
+        {
+            "question": 2,
+            "correct": true,
+            "explanation": ""
+        },
+        {
+            "question": 3,
+            "correct": true,
+            "explanation": ""
+        },
+        {
+            "question": 4,
+            "correct": true,
+            "explanation": ""
+        },
+        {
+            "question": 5,
+            "correct": false,
+            "explanation": "The correct answer is C (Strings are enclosed in single or double quotes). A is incorrect as Python does not require explicit declaration of data types."
+        }
     ]
 }
-```

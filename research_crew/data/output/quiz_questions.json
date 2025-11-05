@@ -1,7 +1,7 @@
 [
-    {"question": "Who created Python?", "options": ["A. Dennis Ritchie", "B. Guido van Rossum", "C. James Gosling", "D. Bjarne Stroustrup"], "answer": "B"},
-    {"question": "What keyword is used to define a function in Python?", "options": ["A. function", "B. def", "C. create", "D. method"], "answer": "B"},
-    {"question": "Which data type represents key-value pairs in Python?", "options": ["A. List", "B. Tuple", "C. Dictionary", "D. Set"], "answer": "C"},
-    {"question": "What is the output of the following code snippet: `if True: print('Hello, World!')`?", "options": ["A. Hello, World!", "B. Syntax Error", "C. False", "D. None"], "answer": "A"},
-    {"question": "In Python, how are code blocks defined?", "options": ["A. Curly braces", "B. Indentation", "C. Parentheses", "D. Square brackets"], "answer": "B"}
+    {"question": "Who created the Python programming language?", "options": ["A. James Gosling", "B. Guido van Rossum", "C. Bjarne Stroustrup", "D. Linus Torvalds"], "answer": "B"},
+    {"question": "Which feature of Python allows for quick testing and debugging?", "options": ["A. Compiled Language", "B. Static Typing", "C. Interpreted Language", "D. Strong Typing"], "answer": "C"},
+    {"question": "What type of programming paradigm does Python NOT support?", "options": ["A. Procedural", "B. Object-oriented", "C. Functional", "D. Assembly"], "answer": "D"},
+    {"question": "What is the output of the following code: `print(greet('Bob'))` if defined as `def greet(name): return f'Hello, {name}!'`?", "options": ["A. Hello, Bob!", "B. Bob!", "C. Hello!", "D. greet"], "answer": "A"},
+    {"question": "Which of the following statements about Python's data types is true?", "options": ["A. Python requires explicit declaration of data types.", "B. Only integers and floats are valid data types.", "C. Strings are enclosed in single or double quotes.", "D. Python does not have a Boolean data type."], "answer": "C"}
 ]
